@@ -62,12 +62,12 @@ set_target_properties( avformat
         PROPERTIES IMPORTED_LOCATION
         ${ffmpeg_lib_dir}/libavformat.so )
 
-add_library( avdevice
-        SHARED
-        IMPORTED)
-set_target_properties( avdevice
-        PROPERTIES IMPORTED_LOCATION
-        ${ffmpeg_lib_dir}/libavdevice.so )
+#add_library( avdevice
+#        SHARED
+#        IMPORTED)
+#set_target_properties( avdevice
+#        PROPERTIES IMPORTED_LOCATION
+#        ${ffmpeg_lib_dir}/libavdevice.so )
 
 # 查找代码中使用到的系统库
 find_library( # Sets the name of the path variable.
@@ -101,7 +101,7 @@ target_link_libraries(
         avfilter
         swscale
         avformat
-        avdevice
+#        avdevice
 
         # Links the target library to the log library
         # included in the NDK.
