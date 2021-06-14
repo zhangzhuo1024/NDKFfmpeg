@@ -6,6 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/button_configuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="configuration" />
+
+    <Button
+        android:id="@+id/button_urlprotocol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="urlprotocol"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_configuration" />
+
+    <Button
+        android:id="@+id/button_avformat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="avformat"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_urlprotocol" />
+
+    <Button
+        android:id="@+id/button_avcodec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="avcodec"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_avformat" />
+
+    <Button
+        android:id="@+id/button_avfilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="avfilter"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_avcodec" />
+
     <TextView
         android:id="@+id/sample_text"
         android:layout_width="wrap_content"
@@ -14,6 +52,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/button_avfilter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
