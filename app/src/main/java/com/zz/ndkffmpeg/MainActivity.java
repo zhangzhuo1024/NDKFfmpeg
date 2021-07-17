@@ -1,13 +1,20 @@
 package com.zz.ndkffmpeg;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.zz.ndkffmpeg.databinding.ActivityMainBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
+    private VideoView videoView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Button avformatButton = (Button) this.findViewById(R.id.button_avformat);
         Button avcodecButton = (Button) this.findViewById(R.id.button_avcodec);
         Button avfilterButton = (Button) this.findViewById(R.id.button_avfilter);
-
+        videoView = (VideoView) this.findViewById(R.id.video_view);
 
         libinfoText.setText(configurationinfo());
 
@@ -68,6 +76,37 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        initPermission();
+    }
+
+    List<String> mPermissionList = new ArrayList<>();
+
+    private void initPermission() {
+
+        mPermissionList.clear();//清空没有通过的权限
+
+        String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE};
+        //逐个判断你要的权限是否已经通过
+        for (int i = 0; i < permissions.length; i++) {
+            if (ContextCompat.checkSelfPermission(this, permissions[i]) != PackageManager.PERMISSION_GRANTED) {
+                mPermissionList.add(permissions[i]);//添加还未授予的权限
+            }
+        }
+
+        //申请权限
+        if (mPermissionList.size() > 0) {
+            //有权限没有通过，需要申请
+            ActivityCompat.requestPermissions(this, permissions, 500);
+        } else {
+            //说明权限都已经通过，可以做你想做的事情去
+        }
+    }
+
+    public void startPlayVideo(View view) {
+        String path = MainActivity.this.getExternalFilesDir(null).getPath();
+        String outFileName = path + "/12345.mp4";
+        videoView.player(outFileName);
     }
 
     /**
